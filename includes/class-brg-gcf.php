@@ -91,7 +91,7 @@ class BRG_GCF {
 		$this->brg_gcf = 'brg_gcf';
 		$this->version = '0.1.0';
 		$this->gmaps_key = "";
-		$this->gcf_post_types = array("");
+		$this->gcf_post_types = array();
 		
 		$this->load_dependencies();
 		$this->set_locale();

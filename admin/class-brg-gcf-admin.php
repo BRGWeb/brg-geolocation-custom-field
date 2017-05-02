@@ -124,7 +124,11 @@ class BRG_GCF_Admin {
 	 */
 
 	function register_meta_boxes() {
-		add_meta_box( 'brg-gcf-metabox', __( 'Locals', 'textdomain' ), array($this, 'display_metabox'), $this->gcf_post_types );
+		global $post;		
+		//check if it's the post-type we want
+		if (in_array($post->post_type, $this->gcf_post_types)){
+			add_meta_box( 'brg-gcf-metabox', __( 'Locals', 'textdomain' ), array($this, 'display_metabox'), $this->gcf_post_types );
+		}
 	}
 	
  
@@ -155,8 +159,10 @@ class BRG_GCF_Admin {
 	 * @param int $post_id Post ID
 	 */
 	function brg_gcf_save_local( $post_id ) {
-		var_dump ($_POST);
-		exit;
+		if (in_array(get_post_type($post_id),$this->gcf_post_types)){
+			//TODO verify nonce
+			update_post_meta( $post_id, '_brg_gcf_locals', $_POST['local'] );
+		}
 	}
 	
 }
